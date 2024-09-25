@@ -1,23 +1,32 @@
-package com.example.goodreads;
-import org.springframework.web.bind.annotation.PathVariable;
+package com.example.goodreads.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-import com.example.goodreads.BookService;
+import com.example.goodreads.service.BookJpaService;
+import com.example.goodreads.model.Book;
+import com.example.goodreads.model.Publisher;
+
 
 @RestController
 public class BookController {
-    BookService bookService = new BookService();
+
+    @Autowired
+    private BookJpaService bookService;
+
+    @GetMapping("/books/{bookId}/publisher")
+    public Publisher getBookPublisher(@PathVariable("bookId") int bookId){
+        return bookService.getBookPublisher(bookId);
+    }
 
     @PutMapping("/books/{bookId}")
     public Book updateBook(@PathVariable("bookId") int bookId, @RequestBody Book book) {
         return bookService.updateBook(bookId, book);
     }
 
-    @PostMapping("/books")
+    @PostMapping("/publisher/books")
     public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }
