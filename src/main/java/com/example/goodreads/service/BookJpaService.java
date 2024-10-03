@@ -1,19 +1,15 @@
 package com.example.goodreads.service;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-
-
 import java.util.*;
-
-import com.example.goodreads.model.Book;
+import com.example.goodreads.model.*;
 import com.example.goodreads.repository.BookJpaRepository;
 import com.example.goodreads.repository.BookRepository;
-import com.example.goodreads.model.Publisher;
 import com.example.goodreads.repository.PublisherJpaRepository;
 
 @Service
@@ -25,6 +21,7 @@ public class BookJpaService implements BookRepository {
     @Autowired
     private PublisherJpaRepository publisherJpaRepository;
 
+    @Override
     public Publisher getBookPublisher(int bookId) {
         try {
             Book book = bookJpaRepository.findById(bookId).get();
@@ -96,5 +93,16 @@ public class BookJpaService implements BookRepository {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public List<Author> getBookAuthors(int bookId){
+        try{
+            Book book = bookJpaRepository.findById(bookId).get();
+            return  book.getAuthors();
+        }catch(Exception e){
+            throw new ResponseStatusException((HttpStatus.NOT_FOUND));
+        }
+
     }
 }

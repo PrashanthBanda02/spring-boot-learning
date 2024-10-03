@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
 import com.example.goodreads.service.BookJpaService;
-import com.example.goodreads.model.Book;
-import com.example.goodreads.model.Publisher;
+import com.example.goodreads.model.*;
 
 
 @RestController
@@ -44,6 +42,11 @@ public class BookController {
     @DeleteMapping("/books/{bookId}")
     public void deleteBook(@PathVariable("bookId") int bookId){
         bookService.deleteBook(bookId);
+    }
+
+    @GetMapping("/books/{bookId}/authors")
+    public List<Author> getBookAuthors(@PathVariable("bookId") int bookId){
+        return bookService.getBookAuthors(bookId);
     }
 
 }

@@ -2,7 +2,14 @@ package com.example.goodreads.model;
 import com.example.goodreads.model.Publisher;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import com.example.goodreads.model.Author;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 
 @Entity
@@ -24,14 +31,24 @@ public class Book {
     private Publisher publisher;
 
 
+    @ManyToMany
+    @JoinTable( name = "book_author",
+            joinColumns = @JoinColumn(name = "bookid"),
+            inverseJoinColumns = @JoinColumn(name = "authorid")
+    )
+    @JsonIgnoreProperties("books")
+    private List<Author> authors = new ArrayList<>();
+
+
     // Hibernate requires a default constructor with no arguments in our entity class
     // in order to create new instances of those classes and perform some operations internally.
     public Book() {}
 
-    public Book(int id, String name, String imageUrl){
+    public Book(int id, String name, String imageUrl, List<Author> authors){
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
+        this.authors = authors;
     }
 
     public int getId() {
@@ -64,4 +81,11 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public List<Author> getAuthors() {
+        return authors;
+    }
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+    
 }
