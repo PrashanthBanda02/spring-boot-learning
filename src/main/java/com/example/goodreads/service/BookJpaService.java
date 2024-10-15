@@ -87,11 +87,10 @@ public class BookJpaService implements BookRepository {
 
     @Override
     public void deleteBook(int bookId) {
-        try {
-            bookJpaRepository.deleteById(bookId);
-        } catch (Exception e) {
+        if (!bookJpaRepository.existsById(bookId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+        bookJpaRepository.deleteById(bookId);
         throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }
 
@@ -105,4 +104,6 @@ public class BookJpaService implements BookRepository {
         }
 
     }
+
+
 }

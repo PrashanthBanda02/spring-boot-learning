@@ -18,6 +18,11 @@ public class Publisher {
     public Publisher() {
     }
 
+    public Publisher(int publisherId, String publisherName) {
+        this.publisherId = publisherId;
+        this.publisherName = publisherName;
+    }
+
     public int getPublisherId() {
         return publisherId;
     }
@@ -33,5 +38,6 @@ public class Publisher {
     public void setPublisherName(String publisherName) {
         this.publisherName = publisherName;
     }
+
 
 }

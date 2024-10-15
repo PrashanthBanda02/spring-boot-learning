@@ -44,10 +44,11 @@ public class Book {
     // in order to create new instances of those classes and perform some operations internally.
     public Book() {}
 
-    public Book(int id, String name, String imageUrl, List<Author> authors){
+    public Book(int id, String name, String imageUrl,Publisher publisher, List<Author> authors){
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
+        this.publisher = publisher;
         this.authors = authors;
     }
 
