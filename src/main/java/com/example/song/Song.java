@@ -1,0 +1,57 @@
+package com.example.song;
+
+public class Song {
+    private int songId;
+    private String songName;
+    private String lyricist;
+    private String singer;
+    private String musicDirector;
+
+    public Song(int songId, String songName, String lyricist, String singer, String musicDirector) {
+        this.songId = songId;
+        this.songName = songName;
+        this.lyricist = lyricist;
+        this.singer = singer;
+        this.musicDirector = musicDirector;
+    }
+
+    public int getSongId() {
+        return this.songId;
+    }
+
+    public String getSongName() {
+        return this.songName;
+    }
+
+    public String getLyricist() {
+        return this.lyricist;
+    }
+
+    public String getSinger() {
+        return this.singer;
+    }
+
+    public String getMusicDirector() {
+        return this.musicDirector;
+    }
+
+    public void setSongId(int id) {
+        this.songId = id;
+    }
+
+    public void setSongName(String name) {
+        this.songName = name;
+    }
+
+    public void setLyricist(String lyricist) {
+        this.lyricist = lyricist;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+    public void setMusicDirector(String musicDirector) {
+        this.musicDirector = musicDirector;
+    }
+}
